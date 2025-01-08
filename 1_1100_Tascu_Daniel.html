@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proiect Raster</title>
+    <link rel="stylesheet" href="1_1100_Tascu_Daniel.css">
+</head>
+<body>
+    <h1>Program Desenare Raster - Canvas</h1>
+    <div class="toolbar">
+        <label for="selecteazaForma">Forma:</label>
+        <select id="selecteazaForma">
+            <option value="elipsa">Elipsa</option>
+            <option value="dreptunghi">Drepunghi</option>
+            <option value="linie">Linie</option>
+        </select>
+
+        <label for="selecteazaGrosime">Grosime:</label>
+        <input type="number" id="selecteazaGrosime" value="2" min="1" max="10">
+
+        <label for="saveColor">Culoare:</label>
+        <input type="color" id="saveColor" value="#000000">
+        
+        <button id="btnStergeCanvas">Sterge Canvas</button>
+        <button id="btnSalvareImage">Salvează PNG</button>
+    </div>
+    <div class="canvas-container">
+        <canvas id="desenareCanvas" width="800" height="600"></canvas>
+    </div>
+    <script src="1_1100_Tascu_Daniel.js"></script>
+</body>
+</html>
+
+<!--butoane canvas meniu etc-->
