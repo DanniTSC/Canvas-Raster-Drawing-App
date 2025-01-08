@@ -5,9 +5,12 @@ const stergereBtn = document.getElementById('btnStergeCanvas');
 const saveBtn = document.getElementById('btnSalvareImage');
 const grosimeLinieIn = document.getElementById('selecteazaGrosime');
 const selectareForma = document.getElementById('selecteazaForma');
+const exportSVGBtn = document.getElementById('btnExportSvg'); 
+const bgColorInput = document.getElementById('bgColor');
 
 
-
+let culoareFundal = bgColorInput.value;
+let formeDesenate = []; 
 let deseneaza = false;
 let initialX, initialY;
 let canvasSnapshot = null;
@@ -40,6 +43,18 @@ canvas.addEventListener('mousemove', (e) => {
 canvas.addEventListener('mouseup', (e) => {
     if (deseneaza) {
         const forma = selectareForma.value; 
+
+        const formaNoua = { 
+            tip: forma,
+            x1: initialX,
+            y1: initialY,
+            x2: e.offsetX,
+            y2: e.offsetY,
+            culoare: colorInput.value,
+            grosime: grosimeLinieIn.value,
+        };
+        formeDesenate.push(formaNoua);
+
         if (forma === 'elipsa') {
             desenareElipsa(initialX, initialY, e.offsetX, e.offsetY, false);
         } else if (forma === 'dreptunghi') {
@@ -47,7 +62,9 @@ canvas.addEventListener('mouseup', (e) => {
         } else if (forma === 'linie') {
             desenareLinie(initialX, initialY, e.offsetX, e.offsetY, false);
         }
+        actualizeazaFundal();
         deseneaza = false;
+        
     }
 });
 
@@ -119,6 +136,8 @@ function desenareLinie(x1,y1,x2,y2,preview)
 
 stergereBtn.addEventListener('click', () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    actualizeazaFundal();
+    formeDesenate = [];
 });
 
 // png save
@@ -129,3 +148,52 @@ saveBtn.addEventListener('click', () => {
     linkSalvare.href = imagineGenerata;
     linkSalvare.click();
 });
+
+// svg export
+exportSVGBtn.addEventListener('click', () => {
+    let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">\n`;
+    svgContent += `<rect width="${canvas.width}" height="${canvas.height}" fill="${culoareFundal}" />\n`;
+    formeDesenate.forEach((forma) => {
+        if (forma.tip === 'elipsa') {
+            const razaX = Math.abs(forma.x2 - forma.x1) / 2;
+            const razaY = Math.abs(forma.y2 - forma.y1) / 2;
+            const centruX = (forma.x1 + forma.x2) / 2;
+            const centruY = (forma.y1 + forma.y2) / 2;
+            svgContent += `<ellipse cx="${centruX}" cy="${centruY}" rx="${razaX}" ry="${razaY}" fill="${forma.culoare}" stroke="${forma.culoare}" stroke-width="${forma.grosime}" />\n`;
+        } else if (forma.tip === 'dreptunghi') {
+            const width = forma.x2 - forma.x1;
+            const height = forma.y2 - forma.y1;
+            svgContent += `<rect x="${forma.x1}" y="${forma.y1}" width="${width}" height="${height}" fill="${forma.culoare}" stroke="${forma.culoare}" stroke-width="${forma.grosime}" />\n`;
+        } else if (forma.tip === 'linie') {
+            svgContent += `<line x1="${forma.x1}" y1="${forma.y1}" x2="${forma.x2}" y2="${forma.y2}" stroke="${forma.culoare}" stroke-width="${forma.grosime}" />\n`;
+        }
+    });
+
+    svgContent += `</svg>`;
+
+  
+    const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+    const link = document.createElement('a');
+    link.download = 'imagine_desen.svg';
+    link.href = URL.createObjectURL(blob);
+    link.click();
+});
+
+bgColorInput.addEventListener('change', () => {
+    culoareFundal = bgColorInput.value;
+    actualizeazaFundal();
+});
+
+function actualizeazaFundal() {
+    context.fillStyle = culoareFundal;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    formeDesenate.forEach((forma) => {
+        if (forma.tip === 'elipsa') {
+            desenareElipsa(forma.x1, forma.y1, forma.x2, forma.y2, false);
+        } else if (forma.tip === 'dreptunghi') {
+            desenareDreptunghi(forma.x1, forma.y1, forma.x2, forma.y2, false);
+        } else if (forma.tip === 'linie') {
+            desenareLinie(forma.x1, forma.y1, forma.x2, forma.y2, false);
+        }
+    });
+}
