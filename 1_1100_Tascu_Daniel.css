@@ -31,3 +31,41 @@ canvas {
     margin: auto;
     cursor: crosshair;
 }
+
+.figure-list-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    width: 300px;
+}
+
+.figure-list-container h3 {
+    margin: 0 0 10px 0;
+}
+
+.figure-list-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.figure-list-container li {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.figure-list-container button {
+    margin-left: 10px;
+    background-color: #ff6666;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 3px 6px;
+    cursor: pointer;
+}
+
+.figure-list-container button:hover {
+    background-color: #ff3333;
+}

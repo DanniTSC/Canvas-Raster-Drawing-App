@@ -29,9 +29,42 @@
         <button id="btnSalvareImage">Salveaza PNG</button>
         <button id="btnExportSvg">Salveaza SVG</button>
     </div>
+
     <div class="canvas-container">
         <canvas id="desenareCanvas" width="800" height="600"></canvas>
     </div>
+
+    <div class="containerListaFiguri">
+        <h3>Lista de figuri</h3>
+        <ul id="listaFiguri"></ul>
+    </div>
+
+    <div class="editFormContainer">
+        <h3>Modifica Figura:</h3>
+        <form id="editForm">
+            <label for="editX1">Coordonata X1:</label>
+            <input type="number" id="editX1" step="1"><br>
+            
+            <label for="editY1">Coordonata Y1:</label>
+            <input type="number" id="editY1" step="1"><br>
+            
+            <label for="editX2">Coordonata X2:</label>
+            <input type="number" id="editX2" step="1"><br>
+            
+            <label for="editY2">Coordonata Y2:</label>
+            <input type="number" id="editY2" step="1"><br>
+            
+            <label for="editColor">Culoare:</label>
+            <input type="color" id="editColor"><br>
+            
+            <label for="editGrosime">Grosime:</label>
+            <input type="number" id="editGrosime" step="1" min="1"><br>
+            
+            <button type="button" id="applyEditBtn">Aplică Modificări</button>
+        </form>
+    </div>
+    
+
     <script src="1_1100_Tascu_Daniel.js"></script>
 </body>
 </html>
