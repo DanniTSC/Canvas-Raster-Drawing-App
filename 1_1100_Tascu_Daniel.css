@@ -1,71 +1,205 @@
-/* stilizare  */
+/* Stil general */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    background: linear-gradient(120deg, #f6f7fb, #e9effd);
+    color: #2c3e50;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4f4f9;
+    min-height: 100vh;
 }
 
 h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #34495e;
     margin-top: 20px;
-    color: #333;
 }
 
-.toolbar {
-    margin: 20px;
+h4 {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+/* Layout principal */
+.main-container {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 }
 
+/* Canvas-ul */
 .canvas-container {
-    border: 1px solid #ccc;
-    background-color: #fff;
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 20px;
 }
 
 canvas {
-    display: block;
-    margin: auto;
+    border-radius: 15px;
+    background: #f9f9f9;
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.05);
     cursor: crosshair;
 }
 
+/* Toolbar */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toolbar label {
+    font-size: 1rem;
+    color: #34495e;
+}
+
+.toolbar input,
+.toolbar select,
+.toolbar button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #dcdde1;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.toolbar input:hover,
+.toolbar select:hover,
+.toolbar button:hover {
+    border-color: #3498db;
+    box-shadow: 0px 0px 8px rgba(52, 152, 219, 0.4);
+}
+
+.toolbar button {
+    background: #3498db;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.toolbar button:hover {
+    background: #2980b9;
+}
+
+/* Lista de forme */
 .figure-list-container {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    width: 300px;
+    flex: 1;
+    max-width: 300px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+    padding: 20px;
 }
 
 .figure-list-container h3 {
-    margin: 0 0 10px 0;
+    color: #34495e;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
 .figure-list-container ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .figure-list-container li {
-    margin: 5px 0;
+    background: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .figure-list-container button {
-    margin-left: 10px;
-    background-color: #ff6666;
-    color: white;
+    background: #e74c3c;
+    color: #ffffff;
     border: none;
-    border-radius: 3px;
-    padding: 3px 6px;
+    border-radius: 8px;
+    padding: 8px 12px;
     cursor: pointer;
 }
 
 .figure-list-container button:hover {
-    background-color: #ff3333;
+    background: #c0392b;
+}
+
+/* Formular editare */
+.edit-form-container {
+    flex: 1;
+    max-width: 300px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.edit-form-container h3 {
+    font-size: 1.5rem;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+.edit-form-container form label {
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.edit-form-container form input,
+.edit-form-container form button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid #dcdde1;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.edit-form-container form button {
+    background: #27ae60;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-form-container form button:hover {
+    background: #229954;
+}
+
+/* Responsivitate */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .canvas-container,
+    .figure-list-container,
+    .edit-form-container {
+        max-width: 100%;
+    }
 }
